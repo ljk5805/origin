@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="box">
+   
+     <navbar :mytext="text" :mygongzi="gongzi" @handldallmyss="handldAllchange1" @kerwinevent1="handleEvent1"></navbar>
+      <p> {{stext}}</p>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+     <script>
+        Vue.component("navbar",{
+          template:`
+          <div>
+            <button @click="handld()">--{{mytext}}--</button>     
+            <span>--{{mygongzi}}--</span>   
+          </div>  
+          `,
+          data(){
+            return {
+              myss:"今天天气haoqinglang"
+            }
+          },
+           props:{
+            mytext:String,
+            mygongzi:Number
+           },
+          //  handldAllClick(){
+          //     console.log("data")
+          //  }
+          methods:{
+            handld(){
+              this.$emit("handldallmyss",this.myss)
+              this.$emit("kerwinevent1",this.myss)
+            }
+          }
+        })
+        new Vue({
+          el:"#box",
+          data:{
+            text:"我是父元素定义的东西，你想要得到我吗",
+            gongzi:2000,
+            stext:""
+          },
+          methods:{
+            handleEvent1(data){
+            console.log("收到钱了-11111",data)
+            this.stext=data
+          },
+          handldAllchange1(data){
+            console.log("收到钱了-11111",data)
+          },
+          }
+        })
+     </script>
+</body>
+</html>
